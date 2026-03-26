@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'hangarin.middleware.LoginRequiredMiddleware',
 ]
 
-ROOT_URLCONF = 'projectsite.urls'
+ROOT_URLCONF = 'hangarin.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'projectsite.wsgi.application'
+WSGI_APPLICATION = 'hangarin.wsgi.application'
 
 
 # Database
