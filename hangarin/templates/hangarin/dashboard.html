@@ -10,13 +10,36 @@
         </a>
     </div>
     <form method="get" class="d-flex flex-wrap gap-2 align-items-center">
-        <input type="text" name="search" class="form-control form-control-sm" style="max-width: 200px;" placeholder="Search by title..." value="{{ current_search }}">
-        <select name="category" class="form-select form-select-sm" style="max-width: 180px;">
-            <option value="">All categories</option>
+        <input type="text" name="search"
+            class="form-control form-control-sm"
+            style="max-width: 200px; background-color: #579fd6; color: #ffffff;"
+            placeholder="Search by title..."
+            value="{{ current_search }}">
+        <style>
+            input[name="search"]::placeholder {
+                color: #ffffff !important;
+                opacity: 1; 
+            }
+        </style>
+        <select name="category" class="form-select form-select-sm"
+                style="max-width: 180px; background-color: #579fd6; color: #ffffff;">
+            <option value="" disabled selected style="color: #ffffff;">All categories</option>
             {% for cat in categories %}
             <option value="{{ cat.id }}" {% if current_category_id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
             {% endfor %}
         </select>
+
+        <style>
+            select[name="category"] option {
+                color: #ffffff;
+                background-color: #579fd6;
+            }
+
+
+            select[name="category"] option:disabled {
+                color: #ffffff !important;
+            }
+        </style>
         <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-filter me-1"></i> Apply</button>
     </form>
 </div>
@@ -27,7 +50,7 @@
     <!-- Only added bg-primary for the #0d6efd background -->
     <div class="card border-0 shadow-sm h-100 bg-primary"> 
         <div class="card-body">
-            <h6 class="text-uppercase text-muted small mb-2">My Focus</h6>
+            <h6 class="text-uppercase text-muted small mb-2">Active Task</h6>
             <h2 class="mb-0 text-primary">{{ total_tasks }}</h2>
             <p class="text-muted small mb-0">Total tasks</p>
         </div>
@@ -44,7 +67,7 @@
         </div>
 </div>
 <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 border-danger border-opacity-50 bg-danger ">
+        <div class="card border-0 shadow-sm h-100" style="background-color: orange; border: 2px solid darkorange;">
             <div class="card-body">
                 <h6 class="text-uppercase text-muted small mb-2">Near Deadline</h6>
                 <h2 class="mb-0 text-danger">{{ due_soon_count }}</h2>
