@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Sign Out — Hangarin{% endblock %}
+{% block title %}Sign Out — Hangarin Ko{% endblock %}
 {% block content %}
 <!-- This wrapper ensures ONLY the Logout card is centered vertically -->
 <div class="d-flex align-items-center justify-content-center" style="min-height: 75vh;">
@@ -12,7 +12,7 @@
                 </div>
                 <h2 class="h4 fw-bold mb-3">Sign Out</h2>
                 <p class="text-muted mb-4 small">Are you sure you want to sign out of your Hangarin account?</p>
-                
+
                 <form method="post" action="{% url 'account_logout' %}">
                     {% csrf_token %}
                     {% if redirect_field_value %}

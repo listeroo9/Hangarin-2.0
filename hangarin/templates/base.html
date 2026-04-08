@@ -1,21 +1,23 @@
 {% load static %}
+{% load pwa %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Hangarin{% endblock %}</title>
+    <title>{% block title %}Hangarin Ko{% endblock %}</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/fontawesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
     {% block extra_css %}{% endblock %}
+    {% progressive_web_app_meta %}
 </head>
 <body class="d-flex flex-column min-vh-100" style="background-color: white; color: black;">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #2762d8;">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{% url 'hangarin:dashboard' %}" style="color: white;">
-                <i class="fa-solid fa-clipboard-list me-2"></i>Hangarin_Ko!
+                <i class="fa-solid fa-clipboard-list me-2"></i>Hangarin Ko
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,5 +65,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/custom.js' %}"></script>
     {% block extra_js %}{% endblock %}
+
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/serviceworker.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registered:', registration.scope);
+            })
+            .catch(function(error) {
+                console.log('ServiceWorker registration failed:', error);
+            });
+        });
+    }
+    </script>
 </body>
 </html>

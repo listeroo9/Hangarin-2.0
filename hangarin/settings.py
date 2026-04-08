@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-j8a^%ts4hbdq26b+oc!_!9h8abs06+d7ukpg84cwx_o8#m_6zx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['appdev.pythonanywhere.com', '127.0.0.1', 'localhost'] 
+ALLOWED_HOSTS = ['johnerwin.pythonanywhere.com', '127.0.0.1', 'localhost','192.168.137.1']
 
 
 # Application definition
@@ -40,13 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth_ui',
     'allauth',
-    'slippers', 
+    'slippers',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'widget_tweaks',
     'hangarin',
+    'pwa',
 ]
 SITE_ID = 1
 
@@ -149,8 +151,8 @@ USE_TZ = True
 #ACCOUNT_LOGIN_METHODS = {'username'}
 #SOCIALACCOUNT_AUTO_SIGNUP = True
 #SOCIALACCOUNT_QUERY_EMAIL = True
-#SOCIALACCOUNT_LOGIN_ON_GET = True      
-#ACCOUNT_LOGOUT_ON_GET = True    
+#SOCIALACCOUNT_LOGIN_ON_GET = True
+#ACCOUNT_LOGOUT_ON_GET = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
@@ -175,3 +177,36 @@ ACCOUNT_SIGNUP_FIELDS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # for testing, print emails to console
+
+# --- Progressive Web App Settings ---
+PWA_APP_NAME = 'Hangarin Ko'
+PWA_APP_DESCRIPTION = "A Progressive Web App version of ProjectSite"
+PWA_APP_THEME_COLOR = '#0A0A0A'
+PWA_APP_BACKGROUND_COLOR = '#FFFFFF'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+{
+'src': '/static/img/icon-192.png',
+'sizes': '192x192'
+},
+{
+'src': '/static/img/icon-512.png',
+'sizes': '512x512'
+}
+]
+PWA_APP_ICONS_APPLE = [
+{
+'src': '/static/img/icon-192.png',
+'sizes': '192x192'
+},
+{
+'src': '/static/img/icon-512.png',
+'sizes': '512x512'
+}
+]
+PWA_APP_DIR = 'ltr'
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')

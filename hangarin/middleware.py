@@ -10,12 +10,17 @@ class LoginRequiredMiddleware:
     def __call__(self, request):
         if not request.user.is_authenticated:
             path = request.path.lstrip("/")
+
             allowed_prefixes = (
                 "admin/",
-                "accounts/",  # allauth: login, signup, social
+                "accounts/",
                 "static/",
                 "favicon.ico",
+                "manifest.json",
+                "serviceworker.js",
             )
+
             if path == "" or not any(path.startswith(p) for p in allowed_prefixes):
                 return redirect(settings.LOGIN_URL + "?next=" + request.get_full_path())
+
         return self.get_response(request)
